@@ -37,11 +37,6 @@ export default function FoodTruckWorkbookPage() {
               and may be a PDF or embedded document. The client should confirm
               what belongs here before launch.
             </p>
-            <ul>
-              <li>Confirm the purpose and title of the workbook.</li>
-              <li>Provide the current PDF, embed, or source document.</li>
-              <li>Approve an accessible web or downloadable version.</li>
-            </ul>
             <Link className="button button--gold" href="/contact">
               Contact the truck
               <ArrowUpRightIcon className="size-5" />

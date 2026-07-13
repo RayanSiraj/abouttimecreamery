@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type KeyboardEvent, useState } from "react";
 
 type Craving = "sweet" | "savory";
 
@@ -23,6 +23,27 @@ const cravings = {
 export function CravingWindow() {
   const [activeCraving, setActiveCraving] = useState<Craving>("sweet");
   const active = cravings[activeCraving];
+
+  function selectCraving(craving: Craving) {
+    setActiveCraving(craving);
+    document.getElementById(`${craving}-tab`)?.focus();
+  }
+
+  function handleTabKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    craving: Craving,
+  ) {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      selectCraving(craving === "sweet" ? "savory" : "sweet");
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      selectCraving("sweet");
+    } else if (event.key === "End") {
+      event.preventDefault();
+      selectCraving("savory");
+    }
+  }
 
   return (
     <div
@@ -153,7 +174,9 @@ export function CravingWindow() {
             role="tab"
             aria-selected={activeCraving === "sweet"}
             aria-controls="craving-panel"
+            tabIndex={activeCraving === "sweet" ? 0 : -1}
             onClick={() => setActiveCraving("sweet")}
+            onKeyDown={(event) => handleTabKeyDown(event, "sweet")}
           >
             Sweet
           </button>
@@ -163,7 +186,9 @@ export function CravingWindow() {
             role="tab"
             aria-selected={activeCraving === "savory"}
             aria-controls="craving-panel"
+            tabIndex={activeCraving === "savory" ? 0 : -1}
             onClick={() => setActiveCraving("savory")}
+            onKeyDown={(event) => handleTabKeyDown(event, "savory")}
           >
             Savory
           </button>

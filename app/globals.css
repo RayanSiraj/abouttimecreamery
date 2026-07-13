@@ -10,6 +10,11 @@
   --paper-white: #fffdf6;
   --error-red: #9f2636;
   --success-green: #28633b;
+  --creamery-blue-deep: color-mix(
+    in srgb,
+    var(--creamery-blue) 90%,
+    var(--truck-night)
+  );
   --shadow-navy: color-mix(in srgb, var(--truck-night) 18%, transparent);
   --soft-navy: color-mix(in srgb, var(--truck-night) 8%, var(--paper-white));
   --line-navy: color-mix(in srgb, var(--truck-night) 24%, transparent);
@@ -36,6 +41,18 @@
 
 * {
   box-sizing: border-box;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 html {
@@ -217,7 +234,7 @@ select {
   padding: 0 0.8rem 1.6rem;
   border: 0.2rem solid var(--truck-night);
   border-radius: 1.4rem;
-  background: var(--creamery-blue);
+  background: var(--creamery-blue-deep);
   box-shadow: 0.55rem 0.55rem 0 var(--truck-night);
 }
 
@@ -347,17 +364,15 @@ select {
 .craving-switcher__tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  border: 0.15rem solid var(--truck-night);
-  border-radius: 999px;
-  background: var(--paper-white);
+  gap: 0.5rem;
 }
 
 .craving-switcher__tabs button {
   min-height: 2.75rem;
   padding: 0.55rem 1rem;
-  border: 0;
-  background: transparent;
+  border: 0.15rem solid var(--truck-night);
+  border-radius: 999px;
+  background: var(--paper-white);
   color: var(--truck-night);
   cursor: pointer;
   font-family: var(--font-utility), sans-serif;
@@ -373,7 +388,7 @@ select {
 
 .craving-switcher__tabs button[aria-selected="true"]:last-child {
   background: var(--chive-green);
-  color: var(--paper-white);
+  color: var(--truck-night);
 }
 
 .craving-switcher__panel {
@@ -774,7 +789,7 @@ select {
 }
 
 .event-banner h2 span {
-  color: var(--creamery-blue);
+  color: var(--truck-night);
 }
 
 .event-banner .button {
@@ -876,7 +891,7 @@ select {
 }
 
 .interior-hero--blue {
-  background: var(--creamery-blue);
+  background: var(--creamery-blue-deep);
   color: var(--paper-white);
 }
 
@@ -955,14 +970,6 @@ select {
 .workbook-state__content > p:not(.utility-label) {
   max-width: 42rem;
   font-size: 1.18rem;
-}
-
-.workbook-state__content ul {
-  display: grid;
-  gap: 0.55rem;
-  max-width: 42rem;
-  padding-left: 1.3rem;
-  margin-block: 1.5rem 2rem;
 }
 
 .contact-section {
@@ -1182,7 +1189,7 @@ select {
 .site-footer address {
   display: grid;
   align-content: start;
-  gap: 0.35rem;
+  gap: 0.5rem;
   font-style: normal;
 }
 
@@ -1206,7 +1213,7 @@ select {
 .site-footer nav ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.2rem 1rem;
+  gap: 0.5rem 1rem;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -1259,7 +1266,7 @@ select {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  background: var(--creamery-blue);
+  background: var(--creamery-blue-deep);
   border-bottom: 0.15rem solid var(--truck-night);
   color: var(--paper-white);
 }
@@ -1456,7 +1463,7 @@ select {
 }
 
 .callout-band--blue {
-  background: var(--creamery-blue);
+  background: var(--creamery-blue-deep);
   color: var(--paper-white);
 }
 
@@ -1542,7 +1549,7 @@ select {
 }
 
 .brand-lockup__type strong {
-  color: var(--creamery-blue);
+  color: var(--creamery-blue-deep);
   font: inherit;
 }
 
@@ -1575,7 +1582,7 @@ select {
 
 .site-nav ul {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.5rem;
   padding: 0;
   margin: 0;
   list-style: none;

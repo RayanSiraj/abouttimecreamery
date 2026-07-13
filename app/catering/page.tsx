@@ -21,7 +21,13 @@ export default function CateringPage() {
         </p>
       </header>
 
-      <section className="catering-page" aria-label="Catering packages">
+      <section
+        className="catering-page"
+        aria-labelledby="catering-packages-heading"
+      >
+        <h2 className="sr-only" id="catering-packages-heading">
+          Catering packages
+        </h2>
         <CateringPackages />
         <div className="catering-note">
           <p className="utility-label">Good to know</p>
