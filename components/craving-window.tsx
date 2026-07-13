@@ -46,10 +46,7 @@ export function CravingWindow() {
   }
 
   return (
-    <div
-      className={`craving-window craving-window--${activeCraving}`}
-      aria-label="Two cravings, one ride"
-    >
+    <div className={`craving-window craving-window--${activeCraving}`}>
       <div className="craving-window__awning" aria-hidden="true">
         <span />
         <span />
