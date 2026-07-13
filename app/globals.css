@@ -190,10 +190,12 @@ select {
 
 .button--gold {
   background: var(--potato-gold);
+  color: var(--truck-night);
 }
 
 .button--paper {
   background: var(--paper-white);
+  color: var(--truck-night);
 }
 
 .hero {
