@@ -1575,12 +1575,13 @@ select {
 }
 
 .site-nav {
+  display: none;
   grid-column: 1 / -1;
   padding-bottom: 1rem;
 }
 
-.site-nav[hidden] {
-  display: none;
+.site-nav--open {
+  display: block;
 }
 
 .site-nav ul {
@@ -1686,8 +1687,7 @@ select {
     display: none;
   }
 
-  .site-nav,
-  .site-nav[hidden] {
+  .site-nav {
     display: block;
     grid-column: auto;
     padding: 0;

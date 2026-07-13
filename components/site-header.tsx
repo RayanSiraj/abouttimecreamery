@@ -67,10 +67,9 @@ export function SiteHeader() {
           {menuOpen ? <CloseIcon /> : <MenuIcon />}
         </button>
         <nav
-          className="site-nav"
+          className={`site-nav${menuOpen ? " site-nav--open" : ""}`}
           id="site-navigation"
           aria-label="Main navigation"
-          hidden={!menuOpen}
         >
           <ul>
             {navigation.map((item) => (
