@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    :root {
+      --truck-night: #17263d;
+      --vanilla-custard: #fff1c7;
+      --strawberry-scoop: #f47fa6;
+      --chive-green: #6e9b3b;
+      --potato-gold: #d99a2b;
+    }
+  </style>
+  <circle cx="32" cy="32" r="32" fill="var(--truck-night)"/>
+  <circle cx="22" cy="25" r="12" fill="var(--strawberry-scoop)"/>
+  <path d="m16 35 6 18 7-18Z" fill="var(--vanilla-custard)"/>
+  <path d="M38 37c1-12 9-20 20-18 4 8 0 17-7 22-6 4-11 2-13-4Z" fill="var(--potato-gold)"/>
+  <path d="M46 21c1 4 4 7 9 8" fill="none" stroke="var(--chive-green)" stroke-linecap="round" stroke-width="4"/>
+</svg>
