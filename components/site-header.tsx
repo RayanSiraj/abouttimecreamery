@@ -1,14 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { BrandMark } from "@/components/brand-mark";
-import {
-  ArrowUpRightIcon,
-  CloseIcon,
-  MenuIcon,
-} from "@/components/icons";
+import { ArrowUpRightIcon, CloseIcon, MenuIcon } from "@/components/icons";
 
 const navigation = [
   { href: "/", label: "Home" },
@@ -50,7 +46,14 @@ export function SiteHeader() {
           href="/"
           onClick={() => setMenuOpen(false)}
         >
-          <BrandMark className="brand-lockup__mark" />
+          <Image
+            className="brand-lockup__mark"
+            src="/images/creamery-logo.png"
+            alt="About Time Creamery logo"
+            width={64}
+            height={64}
+            priority
+          />
           <span className="brand-lockup__type">
             <span>The Stuffed Potato Truck</span>
             <strong>+ About Time Creamery</strong>
