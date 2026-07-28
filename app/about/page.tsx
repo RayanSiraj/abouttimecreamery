@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@/components/icons";
 
@@ -63,6 +64,27 @@ export default function AboutPage() {
             <p>Two cravings, one ride</p>
           </aside>
         </div>
+      </section>
+
+      <section className="about-photos" aria-label="Cristie and Keith at events">
+        <figure>
+          <Image
+            src="/images/owners-window-menu.jpg"
+            alt="Cristie and Keith at the service window with the menu boards visible"
+            width={1024}
+            height={681}
+            sizes="(min-width: 66rem) 34rem, 90vw"
+          />
+        </figure>
+        <figure>
+          <Image
+            src="/images/toddler-icecream.jpg"
+            alt="A young customer enjoying a cup of ice cream beside the truck"
+            width={745}
+            height={1024}
+            sizes="(min-width: 66rem) 20rem, 90vw"
+          />
+        </figure>
       </section>
 
       <section className="callout-band callout-band--blue">

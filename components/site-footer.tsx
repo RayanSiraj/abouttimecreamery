@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { BrandMark } from "@/components/brand-mark";
 import { ArrowUpRightIcon } from "@/components/icons";
 
 const footerNavigation = [
@@ -16,9 +16,24 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer__top">
         <div className="site-footer__brand">
-          <BrandMark className="site-footer__mark" />
+          <div className="site-footer__logos">
+            <Image
+              className="site-footer__logo site-footer__logo--round"
+              src="/images/creamery-logo.png"
+              alt="About Time Creamery logo"
+              width={72}
+              height={72}
+            />
+            <Image
+              className="site-footer__logo site-footer__logo--wordmark"
+              src="/images/stuffed-potato-wordmark.png"
+              alt="The Stuffed Potato Truck logo"
+              width={200}
+              height={133}
+            />
+          </div>
           <div>
-            <p className="utility-label">Two cravings, one ride</p>
+            <p className="script-accent">Two cravings, one ride</p>
             <p className="site-footer__business">
               The Stuffed Potato truck + About Time Creamery
             </p>

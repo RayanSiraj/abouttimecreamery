@@ -3,6 +3,7 @@ import {
   Alegreya_Sans,
   Barlow_Condensed,
   Bowlby_One,
+  Caveat,
 } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -26,6 +27,12 @@ const utility = Barlow_Condensed({
   variable: "--font-utility",
 });
 
+const script = Caveat({
+  weight: ["600", "700"],
+  subsets: ["latin"],
+  variable: "--font-script",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "About Time Creamery + The Stuffed Potato Truck",
@@ -43,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${utility.variable}`}
+      className={`${display.variable} ${body.variable} ${utility.variable} ${script.variable}`}
     >
       <body>
         <a className="skip-link" href="#main-content">
