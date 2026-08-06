@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${origin}/food-truck-workbook?purchase=success`,
+      success_url: `${origin}/food-truck-workbook?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/food-truck-workbook?purchase=cancelled`,
       // Ask Stripe to collect the buyer's email so the webhook can deliver the guide.
       customer_creation: "always",

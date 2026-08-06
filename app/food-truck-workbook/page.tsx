@@ -1,24 +1,55 @@
 import type { Metadata } from "next";
-import { LockIcon, MailIcon } from "@/components/icons";
+import Stripe from "stripe";
+import { ArrowUpRightIcon, LockIcon, MailIcon } from "@/components/icons";
+import {
+  DOWNLOAD_TTL_SECONDS,
+  createDownloadToken,
+} from "@/lib/workbook-download";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Food Truck Start-Up Guide",
   description:
-    "Buy the Food Truck Start-Up Guide and get an instant download link by email.",
+    "Buy the Food Truck Start-Up Guide and download it instantly after checkout.",
 };
 
 const paymentsEnabled = Boolean(
   process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRICE_ID,
 );
 
-type SearchParams = Promise<{ purchase?: string }>;
+type SearchParams = Promise<{ session_id?: string; purchase?: string }>;
+
+/**
+ * After Stripe redirects back with a session id, confirm the payment
+ * server-side before minting a download link. Returns a signed token only for
+ * a genuinely paid session.
+ */
+async function tokenForPaidSession(sessionId: string): Promise<string | null> {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) return null;
+
+  try {
+    const stripe = new Stripe(secretKey);
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    if (session.payment_status !== "paid") return null;
+
+    return createDownloadToken({
+      exp: Math.floor(Date.now() / 1000) + DOWNLOAD_TTL_SECONDS,
+      sid: session.id,
+    });
+  } catch {
+    return null;
+  }
+}
 
 export default async function FoodTruckWorkbookPage({
   searchParams,
 }: {
   searchParams: SearchParams;
 }) {
-  const { purchase } = await searchParams;
+  const { session_id: sessionId, purchase } = await searchParams;
+  const downloadToken = sessionId ? await tokenForPaidSession(sessionId) : null;
 
   return (
     <main id="main-content">
@@ -27,15 +58,21 @@ export default async function FoodTruckWorkbookPage({
         <h1>Food Truck Start-Up Guide</h1>
         <p>
           Everything we wish we&apos;d had when we started our trailer. Buy once
-          and we email your download link right away.
+          and download it right away.
         </p>
       </header>
 
       <section className="workbook-section">
-        {purchase === "success" ? (
+        {downloadToken ? (
           <p className="form-status form-status--success" role="status">
-            Payment received — check your email for the download link. It can
-            take a minute to arrive.
+            Payment received — your download is ready below. The link works for
+            72 hours.
+          </p>
+        ) : null}
+        {sessionId && !downloadToken ? (
+          <p className="form-status form-status--error" role="status">
+            We couldn&apos;t confirm that payment. If you were charged, email
+            Abouttimecreamery@gmail.com and we&apos;ll send your guide.
           </p>
         ) : null}
         {purchase === "cancelled" ? (
@@ -57,14 +94,14 @@ export default async function FoodTruckWorkbookPage({
             <h2>Food Truck Start-Up Guide</h2>
             <p>
               A practical PDF guide to getting a Northeast Florida food truck off
-              the ground. Secure checkout through Stripe; your personal download
-              link is emailed the moment payment clears.
+              the ground. Secure checkout through Stripe, then download the guide
+              instantly.
             </p>
 
             <ul className="workbook-perks">
               <li>
                 <MailIcon className="size-5" />
-                Instant delivery to your inbox after purchase
+                Instant download the moment payment clears
               </li>
               <li>
                 <LockIcon className="size-5" />
@@ -72,7 +109,15 @@ export default async function FoodTruckWorkbookPage({
               </li>
             </ul>
 
-            {paymentsEnabled ? (
+            {downloadToken ? (
+              <a
+                className="button button--gold"
+                href={`/api/download?token=${downloadToken}`}
+              >
+                Download the guide
+                <ArrowUpRightIcon className="size-5" />
+              </a>
+            ) : paymentsEnabled ? (
               <form method="post" action="/api/checkout">
                 <button className="button button--gold" type="submit">
                   Buy the guide
