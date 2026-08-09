@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 
 type FormErrors = Partial<
-  Record<"name" | "email" | "eventType" | "details", string>
+  Record<"name" | "email" | "truck" | "eventType" | "details", string>
 >;
 
 type FormStatus =
@@ -22,6 +22,7 @@ export function ContactForm() {
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
+    const truck = String(data.get("truck") ?? "").trim();
     const eventType = String(data.get("eventType") ?? "").trim();
     const details = String(data.get("details") ?? "").trim();
     const nextErrors: FormErrors = {};
@@ -34,6 +35,10 @@ export function ContactForm() {
       nextErrors.email = "Please enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       nextErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!truck) {
+      nextErrors.truck = "Please choose which truck you need.";
     }
 
     if (!eventType) {
@@ -58,6 +63,7 @@ export function ContactForm() {
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${String(data.get("phone") ?? "").trim() || "Not provided"}`,
+      `Truck requested: ${truck}`,
       `Event type: ${eventType}`,
       `Preferred date: ${String(data.get("date") ?? "").trim() || "Not provided"}`,
       `Location: ${String(data.get("location") ?? "").trim() || "Not provided"}`,
@@ -132,6 +138,33 @@ export function ContactForm() {
             type="tel"
             autoComplete="tel"
           />
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="truck">Which truck?</label>
+          <select
+            id="truck"
+            name="truck"
+            defaultValue=""
+            aria-invalid={Boolean(errors.truck)}
+            aria-describedby={errors.truck ? "truck-error" : undefined}
+          >
+            <option value="" disabled>
+              Choose one
+            </option>
+            <option value="About Time Creamery (ice cream + drinks)">
+              About Time Creamery (ice cream + drinks)
+            </option>
+            <option value="The Stuffed Potato Truck (savory)">
+              The Stuffed Potato Truck (savory)
+            </option>
+            <option value="Both trucks">Both trucks</option>
+          </select>
+          {errors.truck ? (
+            <p className="form-error" id="truck-error">
+              {errors.truck}
+            </p>
+          ) : null}
         </div>
 
         <div className="form-field">

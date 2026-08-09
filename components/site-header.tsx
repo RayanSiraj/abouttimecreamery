@@ -54,9 +54,20 @@ export function SiteHeader() {
             height={64}
             priority
           />
-          <span className="brand-lockup__type">
+          <Image
+            className="brand-lockup__wordmark"
+            src="/images/stuffed-potato-wordmark-compact.png"
+            alt="The Stuffed Potato Truck logo"
+            width={902}
+            height={456}
+            priority
+          />
+          <span className="brand-lockup__type" aria-hidden="true">
             <span>The Stuffed Potato Truck</span>
             <strong>+ About Time Creamery</strong>
+          </span>
+          <span className="sr-only">
+            The Stuffed Potato Truck + About Time Creamery — home
           </span>
         </Link>
         <button
