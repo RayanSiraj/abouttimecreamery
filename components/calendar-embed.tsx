@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@/components/icons";
 
-const calendarUrl = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL;
-const hasCalendar =
-  calendarUrl?.startsWith("https://calendar.google.com/") ?? false;
+const DEFAULT_CALENDAR_URL =
+  "https://calendar.google.com/calendar/embed?src=abouttimecreamery%40gmail.com&ctz=America%2FNew_York&mode=AGENDA&showTitle=0&showPrint=0&showCalendars=0&showTz=0";
+
+const calendarUrl =
+  process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_EMBED_URL ?? DEFAULT_CALENDAR_URL;
+const hasCalendar = calendarUrl.startsWith("https://calendar.google.com/");
 
 export function CalendarEmbed() {
-  if (hasCalendar && calendarUrl) {
+  if (hasCalendar) {
     return (
       <div className="calendar-frame">
         <iframe
