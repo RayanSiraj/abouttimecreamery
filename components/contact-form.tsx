@@ -73,7 +73,6 @@ export function ContactForm() {
       details,
     ].join("\n");
     const mailto = new URL("mailto:Abouttimecreamery@gmail.com");
-    mailto.searchParams.set("cc", "Thestuffedpotatotruck@gmail.com");
     mailto.searchParams.set("subject", `Food truck event request from ${name}`);
     mailto.searchParams.set("body", body);
 
@@ -88,7 +87,7 @@ export function ContactForm() {
       setStatus({
         kind: "error",
         message:
-          "We could not open your email app. Please email either business address directly.",
+          "We could not open your email app. Please email Abouttimecreamery@gmail.com directly.",
       });
     }
   }
