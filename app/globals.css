@@ -1003,6 +1003,28 @@ select {
   font-size: 1.18rem;
 }
 
+.workbook-perks {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 42rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.workbook-perks li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  font-weight: 700;
+  color: var(--brown-deep);
+}
+
+.workbook-perks svg {
+  flex: 0 0 auto;
+  color: var(--mustard);
+}
+
 .contact-section {
   display: grid;
   width: min(100% - 2rem, 76rem);
