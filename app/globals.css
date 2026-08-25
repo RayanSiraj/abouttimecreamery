@@ -1566,7 +1566,15 @@ select {
   flex: none;
 }
 
+.brand-lockup__wordmark {
+  width: auto;
+  height: 2.9rem;
+  flex: none;
+  border-radius: 0.35rem;
+}
+
 .brand-lockup__type {
+  display: none;
   min-width: 0;
   font-family: var(--font-utility), sans-serif;
   font-size: 0.84rem;
@@ -1651,7 +1659,12 @@ select {
   }
 
   .brand-lockup__type {
+    display: block;
     font-size: 0.94rem;
+  }
+
+  .brand-lockup__wordmark {
+    height: 3.4rem;
   }
 
   .craving-switcher {
