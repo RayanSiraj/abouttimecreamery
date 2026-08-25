@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 
 type FormErrors = Partial<
-  Record<"name" | "email" | "truck" | "eventType" | "details", string>
+  Record<"name" | "email" | "concept" | "eventType" | "details", string>
 >;
 
 type FormStatus =
@@ -22,7 +22,7 @@ export function ContactForm() {
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
-    const truck = String(data.get("truck") ?? "").trim();
+    const concept = String(data.get("concept") ?? "").trim();
     const eventType = String(data.get("eventType") ?? "").trim();
     const details = String(data.get("details") ?? "").trim();
     const nextErrors: FormErrors = {};
@@ -37,8 +37,8 @@ export function ContactForm() {
       nextErrors.email = "Please enter a valid email address.";
     }
 
-    if (!truck) {
-      nextErrors.truck = "Please choose which truck you need.";
+    if (!concept) {
+      nextErrors.concept = "Please choose which concept you need.";
     }
 
     if (!eventType) {
@@ -63,7 +63,7 @@ export function ContactForm() {
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${String(data.get("phone") ?? "").trim() || "Not provided"}`,
-      `Truck requested: ${truck}`,
+      `Concept requested: ${concept}`,
       `Event type: ${eventType}`,
       `Preferred date: ${String(data.get("date") ?? "").trim() || "Not provided"}`,
       `Location: ${String(data.get("location") ?? "").trim() || "Not provided"}`,
@@ -140,13 +140,13 @@ export function ContactForm() {
         </div>
 
         <div className="form-field">
-          <label htmlFor="truck">Which truck?</label>
+          <label htmlFor="concept">Which concept?</label>
           <select
-            id="truck"
-            name="truck"
+            id="concept"
+            name="concept"
             defaultValue=""
-            aria-invalid={Boolean(errors.truck)}
-            aria-describedby={errors.truck ? "truck-error" : undefined}
+            aria-invalid={Boolean(errors.concept)}
+            aria-describedby={errors.concept ? "concept-error" : undefined}
           >
             <option value="" disabled>
               Choose one
@@ -157,11 +157,11 @@ export function ContactForm() {
             <option value="The Stuffed Potato Truck (savory)">
               The Stuffed Potato Truck (savory)
             </option>
-            <option value="Both trucks">Both trucks</option>
+            <option value="Both concepts">Both concepts</option>
           </select>
-          {errors.truck ? (
-            <p className="form-error" id="truck-error">
-              {errors.truck}
+          {errors.concept ? (
+            <p className="form-error" id="concept-error">
+              {errors.concept}
             </p>
           ) : null}
         </div>
